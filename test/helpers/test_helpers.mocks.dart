@@ -8,8 +8,10 @@ import 'dart:ui' as _i6;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i9;
 import 'package:flutter/material.dart' as _i4;
+import 'package:friends_around_me/data_models/user_data_model.dart' as _i11;
 import 'package:friends_around_me/services/firebase_core_service.dart' as _i7;
 import 'package:friends_around_me/services/firestore_service.dart' as _i8;
+import 'package:friends_around_me/services/user_service.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
 import 'package:stacked_services/stacked_services.dart' as _i2;
@@ -813,4 +815,56 @@ class MockFirestoreService extends _i1.Mock implements _i8.FirestoreService {
         returnValue: _i5.Stream<List<T>>.empty(),
         returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
       ) as _i5.Stream<List<T>>);
+}
+
+/// A class which mocks [UserService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserService extends _i1.Mock implements _i10.UserService {
+  @override
+  _i5.Future<void> createUser({_i11.UserDataModel? user}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createUser,
+          [],
+          {#user: user},
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<_i11.UserDataModel?> fetchUser({String? uid}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchUser,
+          [],
+          {#uid: uid},
+        ),
+        returnValue: _i5.Future<_i11.UserDataModel?>.value(),
+        returnValueForMissingStub: _i5.Future<_i11.UserDataModel?>.value(),
+      ) as _i5.Future<_i11.UserDataModel?>);
+
+  @override
+  _i5.Future<void> updateUser({_i11.UserDataModel? user}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUser,
+          [],
+          {#user: user},
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> deleteUser({String? uid}) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteUser,
+          [],
+          {#uid: uid},
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }
