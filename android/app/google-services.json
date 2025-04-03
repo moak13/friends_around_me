@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "1067910446190",
+    "firebase_url": "https://memoir-534aa.firebaseio.com",
+    "project_id": "memoir-534aa",
+    "storage_bucket": "memoir-534aa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067910446190:android:afb14b519d3f17c3017a7f",
+        "android_client_info": {
+          "package_name": "com.example.firebase_stack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067910446190-1pe97rujk4uhrrojhrdn76del6e0f10p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3xn8E7cEZvaKAwVh639WpxpzZUQ-86TA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067910446190-1pe97rujk4uhrrojhrdn76del6e0f10p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067910446190:android:16e96b1958f15a2d017a7f",
+        "android_client_info": {
+          "package_name": "com.example.firebase_stacked"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067910446190-1pe97rujk4uhrrojhrdn76del6e0f10p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3xn8E7cEZvaKAwVh639WpxpzZUQ-86TA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067910446190-1pe97rujk4uhrrojhrdn76del6e0f10p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067910446190:android:a7af507f52fa228d017a7f",
+        "android_client_info": {
+          "package_name": "com.example.friends_around_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067910446190-1pe97rujk4uhrrojhrdn76del6e0f10p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3xn8E7cEZvaKAwVh639WpxpzZUQ-86TA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067910446190-1pe97rujk4uhrrojhrdn76del6e0f10p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

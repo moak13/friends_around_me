@@ -4,6 +4,7 @@ import 'package:friends_around_me/ui/views/home/home_view.dart';
 import 'package:friends_around_me/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:friends_around_me/services/firebase_core_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -16,7 +17,8 @@ import 'package:stacked_services/stacked_services.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
-    // @stacked-service
+    InitializableSingleton(classType: FirebaseCoreService),
+// @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
@@ -26,5 +28,6 @@ import 'package:stacked_services/stacked_services.dart';
     StackedDialog(classType: InfoAlertDialog),
     // @stacked-dialog
   ],
+  logger: StackedLogger(),
 )
 class App {}
