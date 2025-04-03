@@ -6,8 +6,10 @@
 import 'dart:async' as _i5;
 import 'dart:ui' as _i6;
 
+import 'package:cloud_firestore/cloud_firestore.dart' as _i9;
 import 'package:flutter/material.dart' as _i4;
 import 'package:friends_around_me/services/firebase_core_service.dart' as _i7;
+import 'package:friends_around_me/services/firestore_service.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
 import 'package:stacked_services/stacked_services.dart' as _i2;
@@ -698,4 +700,117 @@ class MockFirebaseCoreService extends _i1.Mock
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+}
+
+/// A class which mocks [FirestoreService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirestoreService extends _i1.Mock implements _i8.FirestoreService {
+  @override
+  _i5.Future<void> post({
+    required String? path,
+    required Map<String, dynamic>? data,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #post,
+          [],
+          {
+            #path: path,
+            #data: data,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<T?> get<T>({
+    required String? path,
+    required T Function(Map<String, dynamic>)? builder,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #get,
+          [],
+          {
+            #path: path,
+            #builder: builder,
+          },
+        ),
+        returnValue: _i5.Future<T?>.value(),
+        returnValueForMissingStub: _i5.Future<T?>.value(),
+      ) as _i5.Future<T?>);
+
+  @override
+  _i5.Future<void> delete({required String? path}) => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [],
+          {#path: path},
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> patch({
+    required String? path,
+    required Map<String, dynamic>? data,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #patch,
+          [],
+          {
+            #path: path,
+            #data: data,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Stream<T?> streamDocument<T>({
+    required String? path,
+    required T Function(Map<String, dynamic>)? builder,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #streamDocument,
+          [],
+          {
+            #path: path,
+            #builder: builder,
+          },
+        ),
+        returnValue: _i5.Stream<T?>.empty(),
+        returnValueForMissingStub: _i5.Stream<T?>.empty(),
+      ) as _i5.Stream<T?>);
+
+  @override
+  _i5.Stream<List<T>> streamCollection<T>({
+    required String? path,
+    required T Function(Map<String, dynamic>)? builder,
+    _i9.Query<Object?> Function(_i9.Query<Object?>)? queryBuilder,
+    int Function(
+      T,
+      T,
+    )? sort,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #streamCollection,
+          [],
+          {
+            #path: path,
+            #builder: builder,
+            #queryBuilder: queryBuilder,
+            #sort: sort,
+          },
+        ),
+        returnValue: _i5.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
+      ) as _i5.Stream<List<T>>);
 }

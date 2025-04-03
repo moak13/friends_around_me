@@ -3,8 +3,10 @@ import 'package:friends_around_me/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:friends_around_me/ui/views/home/home_view.dart';
 import 'package:friends_around_me/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:friends_around_me/services/firebase_core_service.dart';
+import 'package:friends_around_me/services/firestore_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -18,6 +20,8 @@ import 'package:friends_around_me/services/firebase_core_service.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     InitializableSingleton(classType: FirebaseCoreService),
+    LazySingleton(classType: FirebaseAuthenticationService),
+    LazySingleton(classType: FirestoreService),
 // @stacked-service
   ],
   bottomsheets: [
