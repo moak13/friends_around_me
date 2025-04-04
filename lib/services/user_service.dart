@@ -9,12 +9,12 @@ class UserService {
   final _firestoreService = locator<FirestoreService>();
 
   Future<void> createUser({
-    UserDataModel? user,
+    required UserDataModel user,
   }) async {
     try {
-      await _firestoreService.post(
-        path: 'users/${user?.id}',
-        data: user!.toJson(),
+      await _firestoreService.postUnique(
+        path: 'users/${user.id}',
+        data: user.toJson(),
       );
     } catch (e, s) {
       _logger.e(
@@ -30,7 +30,7 @@ class UserService {
   }
 
   Future<UserDataModel?> fetchUser({
-    String? uid,
+    required String uid,
   }) async {
     try {
       final response = await _firestoreService.get<UserDataModel?>(
@@ -53,12 +53,12 @@ class UserService {
   }
 
   Future<void> updateUser({
-    UserDataModel? user,
+    required UserDataModel user,
   }) async {
     try {
       await _firestoreService.patch(
-        path: 'users/${user?.id}',
-        data: user!.toJson(),
+        path: 'users/${user.id}',
+        data: user.toJson(),
       );
     } catch (e, s) {
       _logger.e(
@@ -74,7 +74,7 @@ class UserService {
   }
 
   Future<void> deleteUser({
-    String? uid,
+    required String uid,
   }) async {
     try {
       await _firestoreService.delete(
