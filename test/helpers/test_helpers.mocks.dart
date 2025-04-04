@@ -9,12 +9,15 @@ import 'dart:ui' as _i7;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i10;
 import 'package:flutter/material.dart' as _i5;
 import 'package:friends_around_me/data_models/user_data_model.dart' as _i12;
+import 'package:friends_around_me/data_models/user_location_data_model.dart'
+    as _i15;
 import 'package:friends_around_me/enum/location_permission_status.dart' as _i14;
 import 'package:friends_around_me/services/firebase_core_service.dart' as _i8;
 import 'package:friends_around_me/services/firestore_service.dart' as _i9;
 import 'package:friends_around_me/services/local_location_service.dart' as _i13;
+import 'package:friends_around_me/services/remote_location_service.dart'
+    as _i16;
 import 'package:friends_around_me/services/user_service.dart' as _i11;
-import 'package:geolocator/geolocator.dart' as _i15;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 import 'package:stacked/stacked.dart' as _i2;
@@ -724,7 +727,25 @@ class MockFirebaseCoreService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockFirestoreService extends _i1.Mock implements _i9.FirestoreService {
   @override
-  _i6.Future<void> post({
+  _i6.Future<void> postUnique({
+    required String? path,
+    required Map<String, dynamic>? data,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #postUnique,
+          [],
+          {
+            #path: path,
+            #data: data,
+          },
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<String?> post({
     required String? path,
     required Map<String, dynamic>? data,
   }) =>
@@ -737,9 +758,9 @@ class MockFirestoreService extends _i1.Mock implements _i9.FirestoreService {
             #data: data,
           },
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i6.Future<String?>.value(),
+        returnValueForMissingStub: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
 
   @override
   _i6.Future<T?> get<T>({
@@ -753,6 +774,26 @@ class MockFirestoreService extends _i1.Mock implements _i9.FirestoreService {
           {
             #path: path,
             #builder: builder,
+          },
+        ),
+        returnValue: _i6.Future<T?>.value(),
+        returnValueForMissingStub: _i6.Future<T?>.value(),
+      ) as _i6.Future<T?>);
+
+  @override
+  _i6.Future<T?> getFirst<T>({
+    required String? path,
+    required T Function(Map<String, dynamic>)? builder,
+    _i10.Query<Object?> Function(_i10.Query<Object?>)? queryBuilder,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getFirst,
+          [],
+          {
+            #path: path,
+            #builder: builder,
+            #queryBuilder: queryBuilder,
           },
         ),
         returnValue: _i6.Future<T?>.value(),
@@ -837,7 +878,7 @@ class MockFirestoreService extends _i1.Mock implements _i9.FirestoreService {
 /// See the documentation for Mockito's code generation for more information.
 class MockUserService extends _i1.Mock implements _i11.UserService {
   @override
-  _i6.Future<void> createUser({_i12.UserDataModel? user}) =>
+  _i6.Future<void> createUser({required _i12.UserDataModel? user}) =>
       (super.noSuchMethod(
         Invocation.method(
           #createUser,
@@ -849,7 +890,7 @@ class MockUserService extends _i1.Mock implements _i11.UserService {
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<_i12.UserDataModel?> fetchUser({String? uid}) =>
+  _i6.Future<_i12.UserDataModel?> fetchUser({required String? uid}) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUser,
@@ -861,7 +902,7 @@ class MockUserService extends _i1.Mock implements _i11.UserService {
       ) as _i6.Future<_i12.UserDataModel?>);
 
   @override
-  _i6.Future<void> updateUser({_i12.UserDataModel? user}) =>
+  _i6.Future<void> updateUser({required _i12.UserDataModel? user}) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateUser,
@@ -873,7 +914,7 @@ class MockUserService extends _i1.Mock implements _i11.UserService {
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<void> deleteUser({String? uid}) => (super.noSuchMethod(
+  _i6.Future<void> deleteUser({required String? uid}) => (super.noSuchMethod(
         Invocation.method(
           #deleteUser,
           [],
@@ -917,11 +958,13 @@ class MockLocalLocationService extends _i1.Mock
       );
 
   @override
-  _i6.Stream<_i15.Position?> get positionStream => (super.noSuchMethod(
+  _i6.Stream<_i15.UserLocationDataModel?> get positionStream =>
+      (super.noSuchMethod(
         Invocation.getter(#positionStream),
-        returnValue: _i6.Stream<_i15.Position?>.empty(),
-        returnValueForMissingStub: _i6.Stream<_i15.Position?>.empty(),
-      ) as _i6.Stream<_i15.Position?>);
+        returnValue: _i6.Stream<_i15.UserLocationDataModel?>.empty(),
+        returnValueForMissingStub:
+            _i6.Stream<_i15.UserLocationDataModel?>.empty(),
+      ) as _i6.Stream<_i15.UserLocationDataModel?>);
 
   @override
   int get listenersCount => (super.noSuchMethod(
@@ -979,14 +1022,16 @@ class MockLocalLocationService extends _i1.Mock
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<_i15.Position?> getCurrentPosition() => (super.noSuchMethod(
+  _i6.Future<_i15.UserLocationDataModel?> getCurrentPosition() =>
+      (super.noSuchMethod(
         Invocation.method(
           #getCurrentPosition,
           [],
         ),
-        returnValue: _i6.Future<_i15.Position?>.value(),
-        returnValueForMissingStub: _i6.Future<_i15.Position?>.value(),
-      ) as _i6.Future<_i15.Position?>);
+        returnValue: _i6.Future<_i15.UserLocationDataModel?>.value(),
+        returnValueForMissingStub:
+            _i6.Future<_i15.UserLocationDataModel?>.value(),
+      ) as _i6.Future<_i15.UserLocationDataModel?>);
 
   @override
   _i6.Future<void> openLocationSettings() => (super.noSuchMethod(
@@ -1017,6 +1062,132 @@ class MockLocalLocationService extends _i1.Mock
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
+
+  @override
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [RemoteLocationService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRemoteLocationService extends _i1.Mock
+    implements _i16.RemoteLocationService {
+  @override
+  bool get isTracking => (super.noSuchMethod(
+        Invocation.getter(#isTracking),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  List<_i15.UserLocationDataModel> get allOtherUsersLocations =>
+      (super.noSuchMethod(
+        Invocation.getter(#allOtherUsersLocations),
+        returnValue: <_i15.UserLocationDataModel>[],
+        returnValueForMissingStub: <_i15.UserLocationDataModel>[],
+      ) as List<_i15.UserLocationDataModel>);
+
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  _i6.Future<void> createUserLocation(
+          {required _i15.UserLocationDataModel? userLocation}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createUserLocation,
+          [],
+          {#userLocation: userLocation},
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<_i15.UserLocationDataModel?> fetchUserLocation(
+          {required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchUserLocation,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i6.Future<_i15.UserLocationDataModel?>.value(),
+        returnValueForMissingStub:
+            _i6.Future<_i15.UserLocationDataModel?>.value(),
+      ) as _i6.Future<_i15.UserLocationDataModel?>);
+
+  @override
+  _i6.Future<void> startTracking() => (super.noSuchMethod(
+        Invocation.method(
+          #startTracking,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> stopTracking() => (super.noSuchMethod(
+        Invocation.method(
+          #stopTracking,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Stream<List<_i15.UserLocationDataModel>> getAllOtherUsersLocations(
+          {required String? userId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAllOtherUsersLocations,
+          [],
+          {#userId: userId},
+        ),
+        returnValue: _i6.Stream<List<_i15.UserLocationDataModel>>.empty(),
+        returnValueForMissingStub:
+            _i6.Stream<List<_i15.UserLocationDataModel>>.empty(),
+      ) as _i6.Stream<List<_i15.UserLocationDataModel>>);
 
   @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:friends_around_me/app/app.logger.dart';
+import 'package:friends_around_me/data_models/user_location_data_model.dart';
 import 'package:friends_around_me/enum/location_permission_status.dart';
 import 'package:friends_around_me/exceptions/app_exception.dart';
 import 'package:geolocator/geolocator.dart';
@@ -19,9 +20,11 @@ class LocalLocationService with ListenableServiceMixin {
   LocationPermissionStatus? get locationPermissionStatusValue =>
       locationPermissionStatus.value;
 
-  final _positionStreamController = StreamController<Position?>.broadcast();
+  final _positionStreamController =
+      StreamController<UserLocationDataModel?>.broadcast();
 
-  Stream<Position?> get positionStream => _positionStreamController.stream;
+  Stream<UserLocationDataModel?> get positionStream =>
+      _positionStreamController.stream;
 
   StreamSubscription<Position>? _positionStreamSubscription;
 
@@ -131,7 +134,10 @@ class LocalLocationService with ListenableServiceMixin {
           distanceFilter: 10,
         ),
       ).listen(
-        (position) => _positionStreamController.add(position),
+        (position) => _positionStreamController.add(UserLocationDataModel(
+          latitude: position.latitude,
+          longitude: position.longitude,
+        )),
         onError: (e) {
           _logger.e(
             'Location stream error',
@@ -155,13 +161,20 @@ class LocalLocationService with ListenableServiceMixin {
   }
 
   // Get current position once
-  Future<Position?> getCurrentPosition() async {
+  Future<UserLocationDataModel?> getCurrentPosition() async {
     try {
-      return await Geolocator.getCurrentPosition(
+      final position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.high,
         ),
       );
+
+      final userLocation = UserLocationDataModel(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+
+      return userLocation;
     } catch (e, s) {
       _logger.e(
         'Error getting current position',

@@ -5,7 +5,7 @@ class FirestoreService {
   final _logger = getLogger('FirestoreService');
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
-  Future<void> post({
+  Future<void> postUnique({
     required String path,
     required Map<String, dynamic> data,
   }) async {
@@ -14,6 +14,19 @@ class FirestoreService {
       await reference.set(data);
     } catch (e, s) {
       _handleError(e, s);
+    }
+  }
+
+  Future<String?> post({
+    required String path,
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      final reference = _firebaseFirestore.collection(path).add(data);
+      return reference.then((onValue) => onValue.id);
+    } catch (e, s) {
+      _handleError(e, s);
+      return Future.value(null);
     }
   }
 
@@ -29,6 +42,28 @@ class FirestoreService {
     } catch (e, s) {
       _handleError(e, s);
       return Future.value(null);
+    }
+  }
+
+  Future<T?> getFirst<T>({
+    required String path,
+    required T Function(Map<String, dynamic> data) builder,
+    Query Function(Query query)? queryBuilder,
+  }) async {
+    try {
+      Query query = _firebaseFirestore.collection(path);
+      if (queryBuilder != null) {
+        query = queryBuilder(query);
+      }
+
+      final QuerySnapshot snapshot = await query.limit(1).get();
+      if (snapshot.docs.isEmpty) return null;
+
+      final doc = snapshot.docs.first;
+      return builder(doc.data() as Map<String, dynamic>);
+    } catch (e, s) {
+      _handleError(e, s);
+      return null;
     }
   }
 
