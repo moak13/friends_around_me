@@ -8,6 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:friends_around_me/services/firebase_core_service.dart';
 import 'package:friends_around_me/services/firestore_service.dart';
 import 'package:friends_around_me/services/user_service.dart';
+import 'package:friends_around_me/services/local_location_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -24,6 +25,7 @@ import 'package:friends_around_me/services/user_service.dart';
     LazySingleton(classType: FirebaseAuthenticationService),
     LazySingleton(classType: FirestoreService),
     LazySingleton(classType: UserService),
+    LazySingleton(classType: LocalLocationService),
 // @stacked-service
   ],
   bottomsheets: [

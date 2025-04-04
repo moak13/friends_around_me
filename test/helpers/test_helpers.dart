@@ -5,6 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:friends_around_me/services/firebase_core_service.dart';
 import 'package:friends_around_me/services/firestore_service.dart';
 import 'package:friends_around_me/services/user_service.dart';
+import 'package:friends_around_me/services/local_location_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -16,6 +17,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<FirebaseCoreService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<FirestoreService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<UserService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<LocalLocationService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -25,6 +27,7 @@ void registerServices() {
   getAndRegisterFirebaseCoreService();
   getAndRegisterFirestoreService();
   getAndRegisterUserService();
+  getAndRegisterLocalLocationService();
 // @stacked-mock-register
 }
 
@@ -96,6 +99,13 @@ MockUserService getAndRegisterUserService() {
   _removeRegistrationIfExists<UserService>();
   final service = MockUserService();
   locator.registerSingleton<UserService>(service);
+  return service;
+}
+
+MockLocalLocationService getAndRegisterLocalLocationService() {
+  _removeRegistrationIfExists<LocalLocationService>();
+  final service = MockLocalLocationService();
+  locator.registerSingleton<LocalLocationService>(service);
   return service;
 }
 // @stacked-mock-create
