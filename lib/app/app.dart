@@ -1,6 +1,5 @@
 import 'package:friends_around_me/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:friends_around_me/ui/dialogs/info_alert/info_alert_dialog.dart';
-import 'package:friends_around_me/ui/views/home/home_view.dart';
 import 'package:friends_around_me/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
@@ -12,6 +11,7 @@ import 'package:friends_around_me/services/local_location_service.dart';
 import 'package:friends_around_me/services/remote_location_service.dart';
 import 'package:friends_around_me/ui/views/signup/signup_view.dart';
 import 'package:friends_around_me/ui/views/signin/signin_view.dart';
+import 'package:friends_around_me/ui/views/map/map_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -19,7 +19,7 @@ import 'package:friends_around_me/ui/views/signin/signin_view.dart';
     AdaptiveRoute(page: StartupView, initial: true),
     AdaptiveRoute(page: SignupView),
     AdaptiveRoute(page: SigninView),
-    AdaptiveRoute(page: HomeView),
+    AdaptiveRoute(page: MapView),
 // @stacked-route
   ],
   dependencies: [
