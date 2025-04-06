@@ -57,13 +57,16 @@ class SignupViewModel extends FormViewModel {
         firstName: firstName ?? '',
         lastName: lastName ?? '',
       );
+
       await _userService.createUser(
         user: user,
       );
-      final remoteUser = await _userService.fetchUser(
+
+      await _userService.fetchUser(
         uid: response.user?.uid ?? '',
       );
-      _navigationService.clearStackAndShow(Routes.homeView);
+
+      _navigationService.clearStackAndShow(Routes.mapView);
     } on AppException catch (e) {
       final errorMessage = e.message;
       _logger.e(

@@ -11,14 +11,14 @@ class LocalLocationService with ListenableServiceMixin {
   final _logger = getLogger('LocalLocationService');
 
   LocalLocationService() {
-    listenToReactiveValues([locationPermissionStatus]);
+    listenToReactiveValues([_locationPermissionStatus]);
   }
 
-  ReactiveValue<LocationPermissionStatus?> locationPermissionStatus =
+  final ReactiveValue<LocationPermissionStatus?> _locationPermissionStatus =
       ReactiveValue<LocationPermissionStatus?>(null);
 
-  LocationPermissionStatus? get locationPermissionStatusValue =>
-      locationPermissionStatus.value;
+  LocationPermissionStatus? get locationPermissionStatus =>
+      _locationPermissionStatus.value;
 
   final _positionStreamController =
       StreamController<UserLocationDataModel?>.broadcast();
@@ -34,7 +34,7 @@ class LocalLocationService with ListenableServiceMixin {
       final serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         _logger.w('Location services are disabled.');
-        locationPermissionStatus.value =
+        _locationPermissionStatus.value =
             LocationPermissionStatus.serviceDisabled;
         return LocationPermissionStatus.serviceDisabled;
       }
@@ -59,7 +59,7 @@ class LocalLocationService with ListenableServiceMixin {
           break;
       }
 
-      locationPermissionStatus.value = status;
+      _locationPermissionStatus.value = status;
       return status;
     } catch (e, s) {
       _logger.e(
@@ -88,7 +88,7 @@ class LocalLocationService with ListenableServiceMixin {
         return LocationPermissionStatus.deniedForever;
       }
 
-      locationPermissionStatus.value = status;
+      _locationPermissionStatus.value = status;
       return status;
     } catch (e, s) {
       _logger.e(
@@ -190,14 +190,14 @@ class LocalLocationService with ListenableServiceMixin {
     try {
       final enabled = await Geolocator.openLocationSettings();
       if (!enabled) {
-        locationPermissionStatus.value =
+        _locationPermissionStatus.value =
             LocationPermissionStatus.serviceDisabled;
         return;
       }
       final status = await checkLocationPermissionStatus();
-      locationPermissionStatus.value = status;
+      _locationPermissionStatus.value = status;
     } catch (e, s) {
-      locationPermissionStatus.value = LocationPermissionStatus.unknown;
+      _locationPermissionStatus.value = LocationPermissionStatus.unknown;
       _logger.e(
         'Error opening location settings',
         error: e,
@@ -213,13 +213,14 @@ class LocalLocationService with ListenableServiceMixin {
     try {
       final enabled = await Geolocator.openAppSettings();
       if (!enabled) {
-        locationPermissionStatus.value = LocationPermissionStatus.deniedForever;
+        _locationPermissionStatus.value =
+            LocationPermissionStatus.deniedForever;
         return;
       }
       final status = await checkLocationPermissionStatus();
-      locationPermissionStatus.value = status;
+      _locationPermissionStatus.value = status;
     } catch (e, s) {
-      locationPermissionStatus.value = LocationPermissionStatus.unknown;
+      _locationPermissionStatus.value = LocationPermissionStatus.unknown;
       _logger.e(
         'Error opening app settings',
         error: e,
