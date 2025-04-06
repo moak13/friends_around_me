@@ -10,13 +10,17 @@ import 'package:friends_around_me/services/firestore_service.dart';
 import 'package:friends_around_me/services/user_service.dart';
 import 'package:friends_around_me/services/local_location_service.dart';
 import 'package:friends_around_me/services/remote_location_service.dart';
+import 'package:friends_around_me/ui/views/signup/signup_view.dart';
+import 'package:friends_around_me/ui/views/signin/signin_view.dart';
 // @stacked-import
 
 @StackedApp(
   routes: [
     AdaptiveRoute(page: StartupView, initial: true),
+    AdaptiveRoute(page: SignupView),
+    AdaptiveRoute(page: SigninView),
     AdaptiveRoute(page: HomeView),
-    // @stacked-route
+// @stacked-route
   ],
   dependencies: [
     LazySingleton(classType: BottomSheetService),
