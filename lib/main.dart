@@ -3,6 +3,7 @@ import 'package:friends_around_me/app/app.bottomsheets.dart';
 import 'package:friends_around_me/app/app.dialogs.dart';
 import 'package:friends_around_me/app/app.locator.dart';
 import 'package:friends_around_me/app/app.router.dart';
+import 'package:friends_around_me/utils/context_util.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 Future<void> main() async {
@@ -18,13 +19,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Friends Around Me',
-      onGenerateRoute: StackedRouter().onGenerateRoute,
-      navigatorKey: StackedService.navigatorKey,
-      navigatorObservers: [
-        StackedService.routeObserver,
-      ],
+    return GestureDetector(
+      onTap: () => ContextUtil.hideKeyboard(context),
+      child: MaterialApp(
+        title: 'Friends Around Me',
+        onGenerateRoute: StackedRouter().onGenerateRoute,
+        navigatorKey: StackedService.navigatorKey,
+        navigatorObservers: [
+          StackedService.routeObserver,
+        ],
+      ),
     );
   }
 }
